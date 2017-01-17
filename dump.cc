@@ -95,7 +95,7 @@ random_query_file(const char *seq, array_size s_len, int q_len, int num_mutation
 char *
 random_sequence_file(array_size s_len, array_size s_num, const char *out_file_name, int &seq_id) {
     FILE *out = fopen(out_file_name, "w");
-    static int sid = 0;
+    int sid = 0;
     char *seq = new char[s_len + 1];
 //    char *res = new char[s_len + 1];
     for (array_size i = 0; i < s_num; ++i, ++sid) {
