@@ -53,31 +53,31 @@ int pow(int b, int p) {
 }
 
 void get_my_test() {
-	config cfg{2500, 12, QUERY_LEN, 412, 2, 5};
+	config cfg{2500000, 12, QUERY_LEN, 412, 2, 5};
 	int sid = 0;
 	const char *seq = random_sequence_file(cfg.s_len, cfg.s_num, "sequence-1.fa", sid);
 	random_query_file(seq, cfg.s_len, cfg.q_len, cfg.m_num, "query-1-1.fq", cfg.q_num, cfg.f_num, sid);
-	cfg = config{2500, 12, QUERY_LEN, 4120, 2, 5};
+	cfg = config{2500000, 12, QUERY_LEN, 4120, 2, 5};
 	random_query_file(seq, cfg.s_len, cfg.q_len, cfg.m_num, "query-1-2.fq", cfg.q_num, cfg.f_num, sid);
-	cfg = {2500, 12, QUERY_LEN, 41200, 2, 5};
+	cfg = {2500000, 12, QUERY_LEN, 41200, 2, 5};
 	random_query_file(seq, cfg.s_len, cfg.q_len, cfg.m_num, "query-1-3.fq", cfg.q_num, cfg.f_num, sid);
-	cfg = {2500, 12, QUERY_LEN, 412000, 2, 5};
+	cfg = {2500000, 12, QUERY_LEN, 412000, 2, 5};
 	random_query_file(seq, cfg.s_len, cfg.q_len, cfg.m_num, "query-1-4.fq", cfg.q_num, cfg.f_num, sid);
-	cfg = {2500, 12, QUERY_LEN, 4120000, 2, 5};
+	cfg = {2500000, 12, QUERY_LEN, 4120000, 2, 5};
 	random_query_file(seq, cfg.s_len, cfg.q_len, cfg.m_num, "query-1-5.fq", cfg.q_num, cfg.f_num, sid);
 
 
-	cfg = {2500, 120, QUERY_LEN, 412, 2, 5};
+	cfg = {250000, 120, QUERY_LEN, 412, 2, 5};
 	sid = 0;
 	seq = random_sequence_file(cfg.s_len, cfg.s_num, "sequence-2.fa", sid);
 	random_query_file(seq, cfg.s_len, cfg.q_len, cfg.m_num, "query-2-1.fq", cfg.q_num, cfg.f_num, sid);
-	cfg = {2500, 12, QUERY_LEN, 4120, 2, 5};
+	cfg = {250000, 12, QUERY_LEN, 4120, 2, 5};
 	random_query_file(seq, cfg.s_len, cfg.q_len, cfg.m_num, "query-2-2.fq", cfg.q_num, cfg.f_num, sid);
-	cfg = {2500, 12, QUERY_LEN, 41200, 2, 5};
+	cfg = {250000, 12, QUERY_LEN, 41200, 2, 5};
 	random_query_file(seq, cfg.s_len, cfg.q_len, cfg.m_num, "query-2-3.fq", cfg.q_num, cfg.f_num, sid);
-	cfg = {2500, 12, QUERY_LEN, 412000, 2, 5};
+	cfg = {250000, 12, QUERY_LEN, 412000, 2, 5};
 	random_query_file(seq, cfg.s_len, cfg.q_len, cfg.m_num, "query-2-4.fq", cfg.q_num, cfg.f_num, sid);
-	cfg = {2500, 12, QUERY_LEN, 4120000, 2, 5};
+	cfg = {250000, 12, QUERY_LEN, 4120000, 2, 5};
 	random_query_file(seq, cfg.s_len, cfg.q_len, cfg.m_num, "query-2-5.fq", cfg.q_num, cfg.f_num, sid);
 
 	cfg = {2500, 1200, QUERY_LEN, 412, 2, 5};
