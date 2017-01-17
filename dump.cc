@@ -45,7 +45,7 @@ void qualities(char *buf, int len) {
 
 void
 random_query_file(const char *seq, array_size s_len, int q_len, int num_mutations,
-                  const char *out_file_name, int num_queries, int num_family) {
+                  const char *out_file_name, int num_queries, int num_family, const int sid) {
     if (s_len < q_len) {
         throw new QueryTooLongException();
     }
@@ -57,14 +57,18 @@ random_query_file(const char *seq, array_size s_len, int q_len, int num_mutation
 
     char *query = new char[q_len + 1];
     char *buf = new char[q_len + 1];
-    char res[100];
+    char res[100], res2[100];
+    int qid = 0;
     sprintf(res, "%s.res", out_file_name);
+    sprintf(res2, "%s.old.res", out_file_name);
     FILE *out = fopen(out_file_name, "w");
     FILE *res_out = fopen(res, "w");
+    FILE *res2_out = fopen(res2, "w");
     for (int i = 0; i < num_family; ++i) {
         dump_substr(query, seq, starts[i], q_len);
         fprintf(out, "@%d:0\n%s\n", i, query);
-        fprintf(res_out, "@%d:0\n%ld\n", i, starts[i]);
+        fprintf(res2_out, "@%d:0\n%ld\n", i, starts[i]);
+		fprintf(res_out, "* %d %d\n%ld\n", sid, qid++, starts[i]);
         qualities(buf, q_len);
         buf[q_len] = 0;
         fprintf(out, "+\n%s\n", buf);
@@ -75,18 +79,26 @@ random_query_file(const char *seq, array_size s_len, int q_len, int num_mutation
             qualities(buf, q_len);
             buf[q_len] = 0;
             fprintf(out, "+\n%s\n", buf);
+			fprintf(res_out, "* %d %d\n%ld\n", sid, qid++, starts[i]);
         }
     }
     delete[] query;
     delete[] buf;
+	fflush(out);
+	fflush(res_out);
+	fflush(res2_out);
     fclose(out);
+    fclose(res_out);
+    fclose(res2_out);
 }
 
-char * random_sequence_file(array_size s_len, array_size s_num, const char *out_file_name) {
+char *
+random_sequence_file(array_size s_len, array_size s_num, const char *out_file_name, int &seq_id) {
     FILE *out = fopen(out_file_name, "w");
+    static int sid = 0;
     char *seq = new char[s_len + 1];
 //    char *res = new char[s_len + 1];
-    for (array_size i = 0; i < s_num; ++i) {
+    for (array_size i = 0; i < s_num; ++i, ++sid) {
         fill_random_sequence(seq, s_len);
         seq[s_len] = 0;
         fprintf(out, ">%ld\n", i);
@@ -95,5 +107,6 @@ char * random_sequence_file(array_size s_len, array_size s_num, const char *out_
     }
     fclose(out);
 //    strcpy(res, seq);
+    seq_id = sid - 1;
     return seq;
 }
